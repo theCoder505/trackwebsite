@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>hello, let's send notifications</h1>
+
+
+
+
+    <script>
+
+
+        function shownotification() {
+            const notification = new Notification("New message from Notification!", {
+                body: "Hey theres a new notification for you! Read it hurry up!",
+                icon: "https://www.logodesignteam.com/blog/wp-content/uploads/2017/07/Google_Logo-770x360.jpg"
+            });
+
+            notification.onclick = (e) => {
+                window.location.href = "https://www.google.com";
+            }
+        }
+
+        console.log(Notification.permission);
+
+        if (Notification.permission === "granted") {
+            setInterval(function () {
+                var seconds = new Date().getSeconds();
+                var mnts = new Date().getMinutes();
+                var hrTime = mnts + "." + seconds;
+                if ((hrTime === "55.0")) {
+                    shownotification();
+                }
+                console.log(hrTime);
+            }, 1000);
+        }
+
+
+        else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    setInterval(function () {
+                        var seconds = new Date().getSeconds();
+                        var mnts = new Date().getMinutes();
+                        var hrTime = mnts + "." + seconds;
+                        if ((hrTime === "55.0")) {
+                            shownotification();
+                        }
+                        console.log(hrTime);
+                    }, 1000);
+                }
+            });
+        }
+
+
+        // when it is in minutes thus it has to be run after every minutes || 60,000 == 60 sec = 1 minutes 
+        // also clear the ask variable after one minutes || no needs to clear 
+
+
+        //important notes 
+        // setInterval(function() {
+        // var secs = new Date().getMinutes();
+        //     if(secs === 30){
+        //         alert("this is running 30 seconds now");
+        //     }    
+        // document.getElementById("demo").innerHTML = secs;
+
+        // }, 1000);
+
+
+
+        // setInterval(function () {
+        //         var seconds = new Date().getSeconds();
+        //         var n = new Date().getMinutes();
+        //         if ((n === 21) && (ask === "empty")) {
+        //             shownotification();
+        //             var ask = "done";
+        //         }
+        //         console.log(n);
+        //         // if (n === 0) {
+        //         //     var ask = "empty";
+        //         // }
+        //     }, 1000);
+
+
+
+
+        // var seconds = new Date().getTime() / 1000;
+        // alert(seconds);
+
+
+
+        var cnsl = new Date().getMinutes();
+        var seconds = new Date().getSeconds();
+        console.log(cnsl + "_" + seconds);
+
+    </script>
+
+</body>
+
+</html>

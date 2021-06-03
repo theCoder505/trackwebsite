@@ -17,6 +17,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="js/push.js"></script>
     <script src="js/push.min.js"></script>
     <script src="js/serviceWorker.min.js"></script>
 
@@ -24,8 +25,8 @@
     <script>
         //custom 
        
+
         function start() {
-              setInterval(function () {
             Push.create("Hello world!", {
                 body: "How's it hangin'?",
                 icon: 'https://img.freepik.com/free-psd/realistic-luxury-embossed-gold-logo-mockup-dark-wall_167120-74.jpg?size=626&ext=jpg',
@@ -36,8 +37,9 @@
                     this.close();
                 }
             });
-            }, 6000);
         };
+
+        // setInterval(start(), 6000);
 
 
         function close() {

@@ -23,6 +23,7 @@
 
     <script>
         //custom 
+         setInterval(function () {
         function start() {
             Push.create("Hello world!", {
                 body: "How's it hangin'?",
@@ -35,6 +36,7 @@
                 }
             });
         };
+               }, 6000);
 
         function close() {
             Push.clear();

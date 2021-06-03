@@ -13,54 +13,76 @@
     <h1>hello, let's send notifications</h1>
 
 
+    <h3>Minutes & seconds Now: <b id="demoTime"></b> </h3>
+
+    <input type="text" name="setTime" id="setTime" style="width: 80%; padding: 10px 20px;" placeholder="SET THE MINUTE TIME YOU WANT NOTIFICATION"
+        onkeypress="myFunction()">
+    <br>
+    <button id="onclick">SET TIME</button>
+    <small>Your set time is: <b id="set"></b> </small>
+
+
 
 
     <script>
 
 
-        function shownotification() {
-            const notification = new Notification("New message from Notification!", {
-                body: "Hey theres a new notification for you! Read it hurry up!",
-                icon: "https://www.logodesignteam.com/blog/wp-content/uploads/2017/07/Google_Logo-770x360.jpg"
-            });
+        var demoTime = document.getElementById("demoTime");
+        var setTimeVal = document.getElementById("setTime").value;
 
-            notification.onclick = (e) => {
-                window.location.href = "https://www.google.com";
+
+        document.getElementById("onclick").addEventListener("click", function () {
+            var val = document.getElementById("setTime").value;
+            document.getElementById("set").innerHTML = val;
+            alert("set value is: " + val);
+
+
+            //main codes 
+            function shownotification() {
+                const notification = new Notification("New message from Notification!", {
+                    body: "Hey theres a new notification for you! Read it hurry up!",
+                    icon: "https://www.logodesignteam.com/blog/wp-content/uploads/2017/07/Google_Logo-770x360.jpg"
+                });
+
+                notification.onclick = (e) => {
+                    window.location.href = "https://www.google.com";
+                }
             }
-        }
 
-        console.log(Notification.permission);
+            console.log(Notification.permission);
 
-        if (Notification.permission === "granted") {
-            setInterval(function () {
-                var seconds = new Date().getSeconds();
-                var mnts = new Date().getMinutes();
-                var hrTime = mnts + "." + seconds;
-                if ((hrTime === "55.0")) {
-                    shownotification();
-                }
-                console.log(hrTime);
-            }, 1000);
-        }
-
-
-        else if (Notification.permission !== "denied") {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    setInterval(function () {
-                        var seconds = new Date().getSeconds();
-                        var mnts = new Date().getMinutes();
-                        var hrTime = mnts + "." + seconds;
-                        if ((hrTime === "55.0")) {
-                            shownotification();
-                        }
-                        console.log(hrTime);
-                    }, 1000);
-                }
-            });
-        }
+            if (Notification.permission === "granted") {
+                setInterval(function () {
+                    var seconds = new Date().getSeconds();
+                    var mnts = new Date().getMinutes();
+                    var hrTime = mnts + "." + seconds;
+                    if ((hrTime === val)) {
+                        shownotification();
+                    }
+                    console.log(hrTime);
+                    demoTime.innerHTML = hrTime;
+                }, 1000);
+            }
 
 
+            else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        setInterval(function () {
+                            var seconds = new Date().getSeconds();
+                            var mnts = new Date().getMinutes();
+                            var hrTime = mnts + "." + seconds;
+                            if ((hrTime === val)) {
+                                shownotification();
+                            }
+                            console.log(hrTime);
+                            demoTime.innerHTML = hrTime;
+                        }, 1000);
+                    }
+                });
+            }
+
+        });
         // when it is in minutes thus it has to be run after every minutes || 60,000 == 60 sec = 1 minutes 
         // also clear the ask variable after one minutes || no needs to clear 
 
